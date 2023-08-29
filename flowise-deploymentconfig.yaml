@@ -27,17 +27,17 @@ spec:
             - sleep 3; flowise start
           env:
             - name: APIKEY_PATH
-              value: /root/.flowise
+              value: /tmp/.flowise
             - name: FLOWISE_PASSWORD
-              value: /root/.flowise
+              value: /tmp/.flowise
             - name: FLOWISE_USERNAME
-              value: /root/.flowise
+              value: /tmp/.flowise
             - name: LOG_PATH
-              value: /root/.flowise/logs
+              value: /tmp/.flowise/logs
             - name: PASSPHRASE
               value: MYPASSPHRASE
             - name: SECRETKEY_PATH
-              value: /root/.flowise
+              value: /tmp/.flowise
           image: ' '
           name: flowise
           ports:
@@ -45,7 +45,7 @@ spec:
               protocol: TCP
           resources: {}
           volumeMounts:
-            - mountPath: /root/.flowise
+            - mountPath: /tmp/.flowise
               name: flowise-claim0
       restartPolicy: Always
       volumes:
