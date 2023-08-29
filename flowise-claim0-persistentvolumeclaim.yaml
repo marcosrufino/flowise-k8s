@@ -5,7 +5,7 @@ metadata:
   labels:
     io.kompose.service: flowise-claim0
   name: flowise-claim0
-  namespace: default
+  namespace: cora-ai-chatbot
 spec:
   accessModes:
     - ReadWriteOnce
