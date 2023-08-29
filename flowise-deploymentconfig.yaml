@@ -45,7 +45,7 @@ spec:
               protocol: TCP
           resources: {}
           volumeMounts:
-            - mountPath: /usr/local/lib/.flowise
+            - mountPath: /usr/local/
               name: flowise-claim0
       restartPolicy: Always
       volumes:
