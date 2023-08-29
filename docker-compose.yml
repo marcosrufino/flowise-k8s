@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+    flowise:
+        image: flowiseai/flowise
+        restart: always
+        environment:
+            - PASSPHRASE=MYPASSPHRASE
+            - FLOWISE_USERNAME=/root/.flowise
+            - FLOWISE_PASSWORD=/root/.flowise
+            - APIKEY_PATH=/root/.flowise
+            - SECRETKEY_PATH=/root/.flowise
+            - LOG_PATH=/root/.flowise/logs
+        ports:
+                - '3000'
+        volumes:
+            - ~/.flowise:/root/.flowise
+        command: /bin/sh -c "sleep 3; flowise start"

@@ -1,0 +1,23 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: flowise
+  name: flowise
+  namespace: default
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+    - annotations: null
+      from:
+        kind: DockerImage
+        name: flowiseai/flowise
+      generation: null
+      importPolicy: {}
+      name: latest
+      referencePolicy:
+        type: ""
+status:
+  dockerImageRepository: ""

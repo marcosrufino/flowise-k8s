@@ -1,0 +1,72 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: flowise
+  name: flowise
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: flowise
+  strategy:
+    resources: {}
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.network/docker-default: "true"
+        io.kompose.service: flowise
+    spec:
+      containers:
+        - args:
+            - /bin/sh
+            - -c
+            - sleep 3; flowise start
+          env:
+            - name: APIKEY_PATH
+              value: /root/.flowise
+            - name: FLOWISE_PASSWORD
+              value: /root/.flowise
+            - name: FLOWISE_USERNAME
+              value: /root/.flowise
+            - name: LOG_PATH
+              value: /root/.flowise/logs
+            - name: PASSPHRASE
+              value: MYPASSPHRASE
+            - name: SECRETKEY_PATH
+              value: /root/.flowise
+          image: ' '
+          name: flowise
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - mountPath: /root/.flowise
+              name: flowise-claim0
+      restartPolicy: Always
+      volumes:
+        - name: flowise-claim0
+          persistentVolumeClaim:
+            claimName: flowise-claim0
+  test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - flowise
+        from:
+          kind: ImageStreamTag
+          name: flowise:latest
+      type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
